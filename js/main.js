@@ -8,16 +8,18 @@ form.addEventListener("submit", (evento) => {
 })
 
 function criaElemento(nome, quantidade) {
+
+    
     const novoItem = document.createElement('li')
-    novoItem.classList.add("item")
+    novoItem.classList.add("item") // <li class="item"></li>
 
     const numeroItem = document.createElement('strong')
-    numeroItem.innerHTML = quantidade
+    numeroItem.innerHTML = quantidade // <strong> quantidade </strong>
 
-    novoItem.appendChild(numeroItem)
-    novoItem.innerHTML += nome
+    novoItem.appendChild(numeroItem) // <li class="item"> <strong> quantidade </strong> </li>
 
-    lista.appendChild(novoItem)
+    novoItem.innerHTML += nome // <li class="item"><strong> quantidade </strong> nome </li>
+
+    lista.appendChild(novoItem) // adiciona o "novoItem" no ultimo lugar da fila da ul id="lista"
+
 }
-
-
