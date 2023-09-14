@@ -1,10 +1,18 @@
 const form = document.getElementById("novoItem")
 const lista = document.getElementById("lista")
+const itens = []
 
 form.addEventListener("submit", (evento) => {
     evento.preventDefault()
 
+    const nome = evento.target.element['nome']
+    const quantidade = evento.target.element['quantidade']
+
     criaElemento(evento.target.elements['nome'].value, evento.target.elements['quantidade'].value)
+
+    // limpa o input depois que adiciona o item
+    nome.value =""
+    quantidade.value =""
 })
 
 function criaElemento(nome, quantidade) {
@@ -22,4 +30,12 @@ function criaElemento(nome, quantidade) {
 
     lista.appendChild(novoItem) // adiciona o "novoItem" no ultimo lugar da fila da ul id="lista"
 
+    const itemAtual = {
+        "nome": nome,
+        "quantidade": quantidade
+    }
+
+    itens.push(itemAtual)
+
+    localStorage.setItem("item", JSON.stringify(itemAtual))
 }
