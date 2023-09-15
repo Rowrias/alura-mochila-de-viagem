@@ -5,10 +5,10 @@ const itens = []
 form.addEventListener("submit", (evento) => {
     evento.preventDefault()
 
-    const nome = evento.target.element['nome']
-    const quantidade = evento.target.element['quantidade']
+    const nome = evento.target.elements['nome']
+    const quantidade = evento.target.elements['quantidade']
 
-    criaElemento(evento.target.elements['nome'].value, evento.target.elements['quantidade'].value)
+    criaElemento(nome.value, quantidade.value)
 
     // limpa o input depois que adiciona o item
     nome.value =""
@@ -18,10 +18,10 @@ form.addEventListener("submit", (evento) => {
 function criaElemento(nome, quantidade) {
 
     
-    const novoItem = document.createElement('li')
+    const novoItem = document.createElement('li') // <li> </li>
     novoItem.classList.add("item") // <li class="item"></li>
 
-    const numeroItem = document.createElement('strong')
+    const numeroItem = document.createElement('strong') // <strong> </strong>
     numeroItem.innerHTML = quantidade // <strong> quantidade </strong>
 
     novoItem.appendChild(numeroItem) // <li class="item"> <strong> quantidade </strong> </li>
@@ -30,12 +30,16 @@ function criaElemento(nome, quantidade) {
 
     lista.appendChild(novoItem) // adiciona o "novoItem" no ultimo lugar da fila da ul id="lista"
 
+
+    // cria um array {"nome":"nome","quantidade":"quantidade"}
     const itemAtual = {
         "nome": nome,
         "quantidade": quantidade
     }
 
+    // joga o array para a lista [{"nome":"nome","quantidade":"quantidade"}]
     itens.push(itemAtual)
 
-    localStorage.setItem("item", JSON.stringify(itemAtual))
+    // transforma o objeto em uma string
+    // localStorage.setItem("item", JSON.stringify(itens))
 }
