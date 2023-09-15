@@ -1,8 +1,10 @@
 const form = document.getElementById("novoItem")
 const lista = document.getElementById("lista")
-const itens = localStorage.getItem("itens") || [] //pega os itens do localstorage ou cria uma lista itens vazia se já não houver itens
+const itens = JSON.parse(localStorage.getItem("itens")) || [] //pega os itens do localstorage ou cria uma lista itens vazia se já não houver itens
 
-itens.forEach((elemento) => {
+
+// Uso do forEach para que todos os itens já escritos na lista sejam mantidos ao atualizar a página 
+itens.forEach((elemento) => { 
     console.log(elemento.nome, elemento.quantidade)
 })
 
