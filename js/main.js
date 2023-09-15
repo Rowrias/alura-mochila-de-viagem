@@ -14,16 +14,30 @@ form.addEventListener("submit", (evento) => {
     const nome = evento.target.elements['nome']
     const quantidade = evento.target.elements['quantidade']
 
+    const existe = itens.find(elemento => elemento.nome === nome.value)
+    
     // cria um array {"nome":"nome","quantidade":"quantidade"}
     const itemAtual = {
         "nome": nome.value,
         "quantidade": quantidade.value
     }
+    
+     // verifica se já existe o elemento criado
+    if (existe) {
+        itemAtual.id = existe.id
 
-    criaElemento(itemAtual)    
+        atualizaElemento()
 
-    // joga o array para a lista [{"nome":"nome","quantidade":"quantidade"}]
-    itens.push(itemAtual)
+    } else {
+        itemAtual.id = existe.length
+
+        criaElemento(itemAtual)    
+
+        // joga o array para a lista [{"nome":"nome","quantidade":"quantidade"}]
+        itens.push(itemAtual)
+    }
+
+    
 
     // transforma o objeto em uma string
     localStorage.setItem("itens", JSON.stringify(itens))
@@ -40,6 +54,7 @@ function criaElemento(item) {
 
     const numeroItem = document.createElement('strong') // <strong> </strong>
     numeroItem.innerHTML = item.quantidade // <strong> quantidade </strong>
+    numeroItem.dataset.id = item.id
 
     novoItem.appendChild(numeroItem) // <li class="item"> <strong> quantidade </strong> </li>
     
@@ -47,4 +62,8 @@ function criaElemento(item) {
 
     lista.appendChild(novoItem) // adiciona o "novoItem" no ultimo lugar da fila da ul id="lista"
 
+}
+
+function atualizaElemento(item) {
+    document.querySelector("[data-id='"+item.id+"']")
 }
