@@ -5,7 +5,7 @@ const itens = JSON.parse(localStorage.getItem("itens")) || [] //pega os itens do
 
 // Uso do forEach para que todos os itens já escritos na lista sejam mantidos ao atualizar a página 
 itens.forEach((elemento) => { 
-    console.log(elemento.nome, elemento.quantidade)
+    criaElemento(elemento)
 })
 
 form.addEventListener("submit", (evento) => {
@@ -26,10 +26,12 @@ form.addEventListener("submit", (evento) => {
     if (existe) {
         itemAtual.id = existe.id
 
-        atualizaElemento()
+        atualizaElemento(itemAtual)
+        
+        itens[existe.id] = itemAtual
 
     } else {
-        itemAtual.id = existe.length
+        itemAtual.id = itens.length
 
         criaElemento(itemAtual)    
 
@@ -65,5 +67,5 @@ function criaElemento(item) {
 }
 
 function atualizaElemento(item) {
-    document.querySelector("[data-id='"+item.id+"']")
+    document.querySelector("[data-id='"+item.id+"']").innerHTML = item.quantidade
 }
